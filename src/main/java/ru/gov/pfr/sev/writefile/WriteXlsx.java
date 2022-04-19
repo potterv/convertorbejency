@@ -34,16 +34,16 @@ public class WriteXlsx {
 //                            person.getKemVydan() != "null") {
                 row = sheet.createRow(i);
 
-                if (person.getId()!=null)
-                row.createCell(0).setCellValue(person.getId());
+//                if (person.getId()!=null)
+                row.createCell(0).setCellValue(i+1);
 
                 row.createCell(1).setCellValue(person.getFa());
 
                 row.createCell(2).setCellValue(person.getIm());
 
                 row.createCell(3).setCellValue(person.getOt());
-
-//                row.createCell(4).setCellValue(person.getDr().toDate());
+//                if (person.getDateVydachi()!=null)
+                row.createCell(4).setCellValue(person.getDr().toDate());
 
                 row.createCell(5).setCellValue(person.getAddr());
 
@@ -57,6 +57,7 @@ public class WriteXlsx {
                 row.createCell(9).setCellValue(person.getKemVydan());
 //            }
             i++;
+
         }
 
             try {

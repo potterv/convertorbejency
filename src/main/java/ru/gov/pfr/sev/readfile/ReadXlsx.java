@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ReadXlsx {
 
-    private Persons persons ;
+    private Persons persons;
 
     public ReadXlsx() {
         this.persons = new Persons();
@@ -112,7 +112,7 @@ public class ReadXlsx {
         while (it.hasNext()) {
             Row row = it.next();
             person = new Person();
-            if (row.getRowNum() >8 && !row.equals(null)) {
+            if (row.getRowNum() > 8 && !row.equals(null)) {
                 Iterator<Cell> cells = row.iterator();
                 while (cells.hasNext()) {
                     Cell cell = cells.next();
@@ -120,6 +120,7 @@ public class ReadXlsx {
 
                         person.setId((int) cell.getNumericCellValue());
                     }
+
 
                     if (cell.getColumnIndex() == 1 && cell.getCellType() == CellType.STRING) {
 
@@ -130,8 +131,10 @@ public class ReadXlsx {
                         person.setIm(cell.getStringCellValue().split(" ")[1]);
                     }
                     if (cell.getColumnIndex() == 1 && cell.getCellType() == CellType.STRING) {
+                        if (cell.getStringCellValue().split(" ").length==3){
+                            person.setOt(cell.getStringCellValue().split(" ")[2]);
+                        }else {person.setOt(" ");}
 
-                        person.setOt(cell.getStringCellValue().split(" ")[2]);
                     }
                     if (cell.getColumnIndex() == 2 && cell.getCellType() == CellType.NUMERIC) {
 
@@ -158,23 +161,24 @@ public class ReadXlsx {
                         person.setKemVydan(cell.getStringCellValue());
                     }
                 }
-                this.persons.addPerson(person);
-                System.out.println(person);
-//                if (
-//                        person.getId() != Integer.getInteger("null") &&
-//                                person.getFa() != "null" &&
-//                                person.getIm() != "null" &&
-//                                person.getOt() != "null" &&
-//                                person.getDr()!=null &&
-////                                person.getAddr() != "null" &&
+//                this.persons.addPerson(person);
+//                System.out.println(person);
+                if (
+                        person.getId() != null &&
+                                person.getFa() != "null" &&
+                                person.getIm() != "null" &&
+                                person.getOt() != "null" &&
+                                person.getDr() != null
+//                                person.getAddr() != "null" &&
 //                                person.getVidDoc() != "null" &&
-////                                person.getSerNumDoc() != "null" &&
-//                                person.getDateVydachi()!=null &&
-//                                person.getKemVydan() != "null") {
-//
-//                    System.out.println(person);
-//                    this.persons.addPerson(person);
-//                }
+//                                person.getSerNumDoc() != "null" &&
+//                                person.getDateVydachi() != null &&
+//                                person.getKemVydan() != "null"
+                ) {
+
+                    System.out.println(person);
+                    this.persons.addPerson(person);
+                }
 //                if (
 //                        person.getId() == Integer.getInteger("null") &&
 //                                person.getFa() == "null" &&
@@ -197,5 +201,5 @@ public class ReadXlsx {
 
     public Persons getPersons() {
         return persons;
-        }
     }
+}
