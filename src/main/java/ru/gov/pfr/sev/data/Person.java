@@ -10,7 +10,7 @@ public class Person {
     private String im;
     private String ot;
     private LocalDate dr;
-    private String addr;
+
     private String vidDoc;
     private String serNumDoc;
     private LocalDate dateVydachi;
@@ -44,13 +44,8 @@ public class Person {
         this.ot = ot;
     }
 
-    public String getAddr() {
-        return addr;
-    }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
+
 
     public void setVidDoc(String vidDoc) {
         this.vidDoc = vidDoc;
@@ -116,7 +111,6 @@ public class Person {
                 ", im='" + im + '\'' +
                 ", ot='" + ot + '\'' +
                 ", dr=" + dr +
-                ", addr='" + addr + '\'' +
                 ", vidDoc='" + vidDoc + '\'' +
                 ", serNumDoc='" + serNumDoc + '\'' +
                 ", dateVydachi=" + dateVydachi +

@@ -45,16 +45,16 @@ public class WriteXlsx {
 //                if (person.getDateVydachi()!=null)
                 row.createCell(4).setCellValue(person.getDr().toDate());
 
-                row.createCell(5).setCellValue(person.getAddr());
+//                row.createCell(5).setCellValue(person.getAddr());
 
-                row.createCell(6).setCellValue(person.getVidDoc());
+                row.createCell(5).setCellValue(person.getVidDoc());
 
-                row.createCell(7).setCellValue(person.getSerNumDoc());
+                row.createCell(6).setCellValue(person.getSerNumDoc());
 
                 if (person.getDateVydachi()!=null)
-                row.createCell(8).setCellValue(person.getDateVydachi().toDate());
+                row.createCell(7).setCellValue(person.getDateVydachi().toDate());
 
-                row.createCell(9).setCellValue(person.getKemVydan());
+                row.createCell(8).setCellValue(person.getKemVydan());
 //            }
             i++;
 
