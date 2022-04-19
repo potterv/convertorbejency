@@ -24,7 +24,12 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ReadXlsx {
-    Persons persons = new Persons();
+
+    private Persons persons ;
+
+    public ReadXlsx() {
+        this.persons = new Persons();
+    }
 
     public void readFromExcel(Persons persons, String file) throws IOException {
         XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(file));
@@ -102,12 +107,12 @@ public class ReadXlsx {
         Person person;
         List<Person> pers = new ArrayList<>();
         Iterator<Row> it = myExcelSheet.iterator();
-        persons = new Persons();
+
 
         while (it.hasNext()) {
             Row row = it.next();
             person = new Person();
-            if (row.getRowNum() > 8 && !row.equals(null)) {
+            if (row.getRowNum() >8 && !row.equals(null)) {
                 Iterator<Cell> cells = row.iterator();
                 while (cells.hasNext()) {
                     Cell cell = cells.next();
@@ -153,22 +158,39 @@ public class ReadXlsx {
                         person.setKemVydan(cell.getStringCellValue());
                     }
                 }
-                if (
-                        person.getId() != Integer.getInteger("null") &&
-                                person.getFa() != "null" &&
-                                person.getIm() != "null" &&
-                                person.getOt() != "null" &&
-//                                person.getDr().equals(null) &&
-                                person.getAddr() != "null" &&
-                                person.getVidDoc() != "null" &&
-                                person.getSerNumDoc() != "null" &&
-//                                person.getDateVydachi().equals(null) &&
-                                person.getKemVydan() != "null") {
-//                    System.out.println(true);
-                    System.out.println(person);
-                    persons.addPerson(person);
-                }
+                this.persons.addPerson(person);
+//                System.out.println(person);
+//                if (
+//                        person.getId() != Integer.getInteger("null") &&
+//                                person.getFa() != "null" &&
+//                                person.getIm() != "null" &&
+//                                person.getOt() != "null" &&
+//                                person.getDr()!=null &&
+////                                person.getAddr() != "null" &&
+//                                person.getVidDoc() != "null" &&
+////                                person.getSerNumDoc() != "null" &&
+//                                person.getDateVydachi()!=null &&
+//                                person.getKemVydan() != "null") {
 //
+//                    System.out.println(person);
+//                    this.persons.addPerson(person);
+//                }
+//                if (
+//                        person.getId() == Integer.getInteger("null") &&
+//                                person.getFa() == "null" &&
+//                                person.getIm() == "null" &&
+//                                person.getOt() == "null" &&
+//                                person.getDr()==null &&
+//                                person.getAddr() == "null" &&
+//                                person.getVidDoc() != "null" &&
+//                                person.getSerNumDoc() != "null" &&
+//                                person.getDateVydachi()!=null &&
+//                                person.getKemVydan() != "null") {
+//
+//                    System.out.println(person);
+//                    this.persons.addPerson(person);
+//                }
+////
             }
         }
     }

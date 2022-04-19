@@ -22,18 +22,19 @@ public class WriteXlsx {
 
         for (Person person : persons.getPersons()
         ) {
-            if (
-                    person.getId() != Integer.getInteger("null") &&
-                            person.getFa() != "null" &&
-                            person.getIm() != "null" &&
-                            person.getOt() != "null" &&
-//                                person.getDr() != "null" &&
-                            person.getAddr() != "null" &&
-                            person.getVidDoc() != "null" &&
-                            person.getSerNumDoc() != "null" &&
-                            person.getKemVydan() != "null") {
+//            if (
+//                    person.getId() != Integer.getInteger("null") &&
+//                            person.getFa() != "null" &&
+//                            person.getIm() != "null" &&
+//                            person.getOt() != "null" &&
+////                                person.getDr() != "null" &&
+//                            person.getAddr() != "null" &&
+//                            person.getVidDoc() != "null" &&
+//                            person.getSerNumDoc() != "null" &&
+//                            person.getKemVydan() != "null") {
                 row = sheet.createRow(i);
 
+//                if ()
                 row.createCell(0).setCellValue(person.getId());
 
                 row.createCell(1).setCellValue(person.getFa());
@@ -42,8 +43,7 @@ public class WriteXlsx {
 
                 row.createCell(3).setCellValue(person.getOt());
 
-//            row.createCell(4).setCellValue(person.getId());
-                row.createCell(4).setCellValue(person.getDr().toDate());
+//                row.createCell(4).setCellValue(person.getDr().toDate());
 
                 row.createCell(5).setCellValue(person.getAddr());
 
@@ -51,10 +51,11 @@ public class WriteXlsx {
 
                 row.createCell(7).setCellValue(person.getSerNumDoc());
 
+                if (person.getDateVydachi()!=null)
                 row.createCell(8).setCellValue(person.getDateVydachi().toDate());
 
                 row.createCell(9).setCellValue(person.getKemVydan());
-            }
+//            }
             i++;
         }
 
