@@ -34,7 +34,7 @@ public class WriteXlsx {
 //                            person.getKemVydan() != "null") {
                 row = sheet.createRow(i);
 
-//                if ()
+                if (person.getId()!=null)
                 row.createCell(0).setCellValue(person.getId());
 
                 row.createCell(1).setCellValue(person.getFa());

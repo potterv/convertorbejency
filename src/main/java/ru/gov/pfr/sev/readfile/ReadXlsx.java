@@ -159,7 +159,7 @@ public class ReadXlsx {
                     }
                 }
                 this.persons.addPerson(person);
-//                System.out.println(person);
+                System.out.println(person);
 //                if (
 //                        person.getId() != Integer.getInteger("null") &&
 //                                person.getFa() != "null" &&
