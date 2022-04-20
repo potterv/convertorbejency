@@ -19,7 +19,7 @@ public class WriteXlsx {
         Sheet sheet = workbook.createSheet("001");
         Row row;
         int i = 0;
-
+        int j = 1;
         for (Person person : persons.getPersons()
         ) {
 //            if (
@@ -32,44 +32,44 @@ public class WriteXlsx {
 //                            person.getVidDoc() != "null" &&
 //                            person.getSerNumDoc() != "null" &&
 //                            person.getKemVydan() != "null") {
-                row = sheet.createRow(i);
-
+            row = sheet.createRow(i);
+            System.out.println(j);
 //                if (person.getId()!=null)
-                row.createCell(0).setCellValue(i+1);
+            row.createCell(0).setCellValue(j);
 
-                row.createCell(1).setCellValue(person.getFa());
+            row.createCell(1).setCellValue(person.getFa());
 
-                row.createCell(2).setCellValue(person.getIm());
+            row.createCell(2).setCellValue(person.getIm());
 
-                row.createCell(3).setCellValue(person.getOt());
+            row.createCell(3).setCellValue(person.getOt());
 //                if (person.getDateVydachi()!=null)
-                row.createCell(4).setCellValue(person.getDr().toDate());
+            row.createCell(4).setCellValue(person.getDr().toDate());
 
 //                row.createCell(5).setCellValue(person.getAddr());
 
-                row.createCell(5).setCellValue(person.getVidDoc());
+            row.createCell(5).setCellValue(person.getVidDoc());
 
-                row.createCell(6).setCellValue(person.getSerNumDoc());
+            row.createCell(6).setCellValue(person.getSerNumDoc());
 
-                if (person.getDateVydachi()!=null)
-                row.createCell(7).setCellValue(person.getDateVydachi().toDate());
+//                if (person.getDateVydachi()!=null)
+            row.createCell(7).setCellValue(person.getDateVydachi().toDate());
 
-                row.createCell(8).setCellValue(person.getKemVydan());
+            row.createCell(8).setCellValue(person.getKemVydan());
 //            }
             i++;
-
+            ++j;
         }
-
-            try {
-                workbook.write(new FileOutputStream(fileName));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                workbook.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        System.out.println("count Row "+j);
+        try {
+            workbook.write(new FileOutputStream(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
+        try {
+            workbook.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+}

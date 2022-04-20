@@ -14,7 +14,7 @@ class ReadXlsxTest {
         ReadXlsx readXlsx = new ReadXlsx();
         try {
 //            readXlsx.readFromExcel(new Persons(), "fileIn/??? ?? ??????????? ?? 58 ???. ?? 04.04.2022.xlsx");
-            readXlsx.read("fileIn/ПФ  129 человек.xlsx");
+            readXlsx.read("fileIn/ПРОВЕРЕНО Крым без СНИЛС 52 человека Ирина 18.04.xlsx");
         } catch (IOException e) {
             e.printStackTrace();
         }

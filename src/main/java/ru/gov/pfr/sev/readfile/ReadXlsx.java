@@ -167,6 +167,7 @@ public class ReadXlsx {
                                 case STRING:
                                     StringBuilder convertDate = new StringBuilder();
                                     String[] arrayDate = cell.getStringCellValue().split("\\.");
+                                    System.out.println(cell.toString());
                                     convertDate.append(arrayDate[2]);
                                     convertDate.append("-");
                                     convertDate.append(arrayDate[1]);
@@ -212,34 +213,18 @@ public class ReadXlsx {
                 if (
                         person.getId() != null &&
                                 person.getFa() != "null" &&
-                                person.getIm() != "null" &&
-                                person.getOt() != "null" &&
-                                person.getDr() != null
-//                                person.getAddr() != "null" &&
-//                                person.getVidDoc() != "null" &&
+                                person.getDr() != null &&
+
+                                person.getVidDoc() != "null"
 //                                person.getSerNumDoc() != "null" &&
 //                                person.getDateVydachi() != null &&
 //                                person.getKemVydan() != "null"
                 ) {
 
-                    System.out.println(person);
+//                    System.out.println(person);
                     this.persons.addPerson(person);
                 }
-//                if (
-//                        person.getId() == Integer.getInteger("null") &&
-//                                person.getFa() == "null" &&
-//                                person.getIm() == "null" &&
-//                                person.getOt() == "null" &&
-//                                person.getDr()==null &&
-//                                person.getAddr() == "null" &&
-//                                person.getVidDoc() != "null" &&
-//                                person.getSerNumDoc() != "null" &&
-//                                person.getDateVydachi()!=null &&
-//                                person.getKemVydan() != "null") {
-//
-//                    System.out.println(person);
-//                    this.persons.addPerson(person);
-//                }
+
             }
         }
     }
