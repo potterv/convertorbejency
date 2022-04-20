@@ -11,19 +11,19 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.joda.time.LocalDate;
 
+
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormatter;
 import ru.gov.pfr.sev.data.Person;
 import ru.gov.pfr.sev.data.Persons;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+
+
+import java.util.*;
 
 public class ReadXlsx {
 
@@ -109,7 +109,8 @@ public class ReadXlsx {
         Person person;
         List<Person> pers = new ArrayList<>();
         Iterator<Row> it = myExcelSheet.iterator();
-        DateTimeFormatter dateTimeFormatter =  DateTimeFormatter.ofPattern("dd-mm-yyyy");
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
+
 
         while (it.hasNext()) {
             Row row = it.next();
@@ -122,16 +123,19 @@ public class ReadXlsx {
                         if (cell.getColumnIndex() == 0 && cell.getCellType() == CellType.NUMERIC) {
 
                             person.setId((int) cell.getNumericCellValue());
+                            continue;
                         }
 
 
                         if (cell.getColumnIndex() == 1 && cell.getCellType() == CellType.STRING) {
 
                             person.setFa(cell.getStringCellValue().split(" ")[0]);
+
                         }
                         if (cell.getColumnIndex() == 1 && cell.getCellType() == CellType.STRING) {
 
                             person.setIm(cell.getStringCellValue().split(" ")[1]);
+
                         }
                         if (cell.getColumnIndex() == 1 && cell.getCellType() == CellType.STRING) {
                             if (cell.getStringCellValue().split(" ").length == 3) {
@@ -142,47 +146,85 @@ public class ReadXlsx {
 
                         }
                         if (cell.getColumnIndex() == 2 && cell.getCellType() == CellType.NUMERIC) {
-
+//                            System.out.println(cell.getStringCellValue());
                             person.setDr(LocalDate.fromDateFields(cell.getDateCellValue()));
+                            continue;
                         }
 
                         if (cell.getColumnIndex() == 4 && cell.getCellType() == CellType.STRING) {
 
                             person.setVidDoc(cell.getStringCellValue());
+                            continue;
                         }
                         if (cell.getColumnIndex() == 5 && cell.getCellType() == CellType.STRING) {
 
                             person.setSerNumDoc(cell.getStringCellValue());
+                            continue;
                         }
-                        if (cell.getColumnIndex() == 6 && cell.getCellType() == CellType.NUMERIC) {
+                        if (cell.getColumnIndex() == 6) {
 
-                            person.setDateVydachi(LocalDate.fromDateFields(cell.getDateCellValue()));
-                        }
-                        if (cell.getColumnIndex() == 7 && cell.getCellType() == CellType.STRING) {
+                            switch (cell.getCellType()) {
+                                case STRING:
+                                    StringBuilder convertDate = new StringBuilder();
+                                    String[] arrayDate = cell.getStringCellValue().split("\\.");
+                                    convertDate.append(arrayDate[2]);
+                                    convertDate.append("-");
+                                    convertDate.append(arrayDate[1]);
+                                    convertDate.append("-");
+                                    convertDate.append(arrayDate[0]);
+                                    person.setDateVydachi(LocalDate.parse(convertDate.toString()));
+                                    break;
+                                case NUMERIC:
+                                    person.setDateVydachi(LocalDate.fromDateFields(cell.getDateCellValue()));
+                                    break;
+                                case BOOLEAN:
+                                    break;
+                                case FORMULA:
+                                    break;
+                                default:break;
+                            }
 
-                            person.setKemVydan(cell.getStringCellValue());
+                            continue;
                         }
-                    }else{continue;}
+                        if (cell.getColumnIndex() == 7) {
+
+                            switch (cell.getCellType()) {
+                                case STRING:
+                                    person.setKemVydan(cell.getStringCellValue());
+                                    break;
+                                case NUMERIC:
+                                    person.setKemVydan(cell.toString().split("\\.")[0]);
+                                    break;
+
+                                default: break;
+                            }
+
+                            continue;
+
+                        }
+                    } else {
+                        continue;
+                    }
                 }
 
 //                this.persons.addPerson(person);
 //                System.out.println(person);
-                    if (
-                            person.getId() != null &&
-                                    person.getFa() != "null" &&
-                                    person.getIm() != "null" &&
-                                    person.getOt() != "null" &&
-                                    person.getDr() != null
+                if (
+                        person.getId() != null &&
+                                person.getFa() != "null" &&
+                                person.getIm() != "null" &&
+                                person.getOt() != "null" &&
+                                person.getDr() != null
 //                                person.getAddr() != "null" &&
 //                                person.getVidDoc() != "null" &&
 //                                person.getSerNumDoc() != "null" &&
 //                                person.getDateVydachi() != null &&
 //                                person.getKemVydan() != "null"
-                    ) {
+                ) {
 
-                        System.out.println(person);
-                        this.persons.addPerson(person);
-                    }
+                    System.out.println(person);
+                    this.persons.addPerson(person);
+                }
 //                if (
 //                        person.getId() == Integer.getInteger("null") &&
 //                                person.getFa() == "null" &&
@@ -198,9 +240,9 @@ public class ReadXlsx {
 //                    System.out.println(person);
 //                    this.persons.addPerson(person);
 //                }
-                }
             }
         }
+    }
 
 
     public Persons getPersons() {
